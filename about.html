@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}About - {{ site_name }}{% endblock %}
+
+{% block content %}
+<!-- About Hero -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="display-4 fw-bold mb-4">About {{ site_name }}</h1>
+                <p class="lead">We are a team of passionate developers dedicated to creating exceptional web applications using cutting-edge technologies.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-number display-4 fw-bold text-primary">{{ stats.years_experience }}</div>
+                    <div class="stat-label h5">Years Experience</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-number display-4 fw-bold text-success">{{ stats.projects_completed }}</div>
+                    <div class="stat-label h5">Projects Completed</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-number display-4 fw-bold text-info">{{ stats.happy_clients }}</div>
+                    <div class="stat-label h5">Happy Clients</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-number display-4 fw-bold text-warning">{{ stats.team_members }}</div>
+                    <div class="stat-label h5">Team Members</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold">Meet Our Team</h2>
+                <p class="lead text-muted">The talented people behind our success</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for member in team_members %}
+            <div class="col-md-4">
+                <div class="card team-card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <img src="{{ member.image }}" alt="{{ member.name }}" class="team-image rounded-circle mb-3">
+                        <h5 class="card-title">{{ member.name }}</h5>
+                        <p class="text-primary fw-semibold">{{ member.role }}</p>
+                        <p class="card-text text-muted">{{ member.bio }}</p>
+                        <div class="social-links">
+                            <a href="#" class="text-muted me-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- All Projects Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold">Our Projects</h2>
+                <p class="lead text-muted">A showcase of our recent work</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for project in all_projects %}
+            <div class="col-md-4">
+                <div class="card project-card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <span class="badge bg-{{ 'success' if project.status == 'Completed' else 'warning' if project.status == 'In Progress' else 'secondary' }}">
+                                {{ project.status }}
+                            </span>
+                        </div>
+                        <p class="card-text text-muted">{{ project.description }}</p>
+                        <div class="mb-3">
+                            {% for tech in project.technologies %}
+                            <span class="badge bg-light text-dark me-1 mb-1">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
